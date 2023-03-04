@@ -1,5 +1,9 @@
 # adm-desa
 
+# Requirement
+- Java 8
+- MySql
+- Spring boot 2.5.0
 
 # Query
 CREATE TABLE penduduk (
@@ -53,4 +57,10 @@ CREATE TABLE village_organization_detail (
   nik VARCHAR(16),
   position VARCHAR(50),
   status VARCHAR(10)
+);
+
+CREATE TABLE village_organization_structure (
+id INT AUTO_INCREMENT PRIMARY KEY,
+full_name VARCHAR(255),
+position VARCHAR(255)
 );
