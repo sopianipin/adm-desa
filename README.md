@@ -1,5 +1,9 @@
 # adm-desa
 
+# Requirement
+- Java 8
+- MySql
+- Spring boot 2.5.0
 
 # Query
 CREATE TABLE penduduk (
