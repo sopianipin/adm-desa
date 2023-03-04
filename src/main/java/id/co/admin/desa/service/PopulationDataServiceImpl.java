@@ -1,15 +1,16 @@
 package id.co.admin.desa.service;
 
+import java.util.Date;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import id.co.admin.desa.dto.PopulationDataDto;
 import id.co.admin.desa.model.PopulationDataEntity;
 import id.co.admin.desa.repository.PopulationDataRepository;
 import id.co.admin.desa.util.BaseResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.Optional;
 
 @Service
 @Transactional
