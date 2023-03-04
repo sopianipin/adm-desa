@@ -58,3 +58,9 @@ CREATE TABLE village_organization_detail (
   position VARCHAR(50),
   status VARCHAR(10)
 );
+
+CREATE TABLE village_organization_structure (
+id INT AUTO_INCREMENT PRIMARY KEY,
+full_name VARCHAR(255),
+position VARCHAR(255)
+);
