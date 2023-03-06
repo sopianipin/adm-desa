@@ -10,3 +10,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+app:
+  cors:
+    allowedOrigins: http://localhost:3000,http://192.168.141.183:3000,https://5182-140-213-0-103.ngrok.io # Comma separated list of allowed origins
