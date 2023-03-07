@@ -9,8 +9,13 @@ import id.co.admin.desa.model.Program;
 
 public interface ProgramRepository extends JpaRepository<Program, Long> {
     // Laporan jumlah penduduk
-    @Query("SELECT COUNT(p) FROM Penduduk p")
-    Long countPenduduk();
+    @Query(value = "SELECT COUNT(id) AS total_penduduk, " +
+            "COUNT(CASE WHEN gender = 'MALE' THEN 1 END) AS jumlah_laki_laki, " +
+            "COUNT(CASE WHEN gender = 'FEMALE' THEN 1 END) AS jumlah_perempuan, " +
+            "COUNT(CASE WHEN marital_status = 'Married' THEN 1 END) AS jumlah_kawin, " +
+            "COUNT(CASE WHEN marital_status = 'Single' THEN 1 END) AS jumlah_belum_kawin " +
+            "FROM penduduk", nativeQuery = true)
+    List<Object[]> getPendudukStatistik();
 
     // Laporan data program
     @Query("SELECT p FROM Program p")

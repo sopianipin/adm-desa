@@ -18,8 +18,17 @@ public class ReportService {
     @Autowired
     private ProgramRepository programRepository;
 
-    public Long countPenduduk() {
-        return programRepository.countPenduduk();
+    public PendudukStatistikDTO countPenduduk() {
+        List<Object[]> result = programRepository.getPendudukStatistik();
+        Object[] row = result.get(0);
+
+        BigInteger totalPenduduk = (BigInteger) row[0];
+        BigInteger jumlahLakiLaki = (BigInteger) row[1];
+        BigInteger jumlahPerempuan = (BigInteger) row[2];
+        BigInteger jumlahKawin = (BigInteger) row[3];
+        BigInteger jumlahBelumKawin = (BigInteger) row[4];
+
+        return new PendudukStatistikDTO(totalPenduduk, jumlahLakiLaki, jumlahPerempuan, jumlahKawin, jumlahBelumKawin);
     }
 
     public List<Program> findAllPrograms() {

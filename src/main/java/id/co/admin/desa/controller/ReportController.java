@@ -13,6 +13,8 @@ import id.co.admin.desa.dto.VillageOrganizationDetailResponseDTO;
 import id.co.admin.desa.dto.VillageOrganizationResponseDTO;
 import id.co.admin.desa.model.Program;
 import id.co.admin.desa.service.ReportService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Info;
 
 @RestController
 @RequestMapping("/reports")
@@ -22,13 +24,14 @@ public class ReportController {
     private ReportService pendudukService;
 
     // Laporan jumlah penduduk
+    @ApiOperation(value = "Laporan jumlah penduduk")
     @GetMapping("/penduduk")
-    public ResponseEntity<Long> getJumlahPenduduk() {
-        Long countPenduduk = pendudukService.countPenduduk();
-        return ResponseEntity.ok(countPenduduk);
+    public ResponseEntity getJumlahPenduduk() {
+        return ResponseEntity.ok(pendudukService.countPenduduk());
     }
 
     // Laporan data program
+    @ApiOperation(value = "Laporan data program")
     @GetMapping("/program")
     public ResponseEntity getAllPrograms() {
         List<Program> findAllPrograms = pendudukService.findAllPrograms();
@@ -36,6 +39,7 @@ public class ReportController {
     }
 
     // Laporan penerima program
+    @ApiOperation(value = "Laporan penerima program")
     @GetMapping("/program/details")
     public ResponseEntity getProgramDetails() {
         List<ProgramDetailsResponseDTO> findProgramDetails = pendudukService.findProgramDetails();
@@ -43,6 +47,7 @@ public class ReportController {
     }
 
     // Laporan organisasi desa
+    @ApiOperation(value = "Laporan organisasi desa")
     @GetMapping("/village-organization")
     public ResponseEntity countVillageOrganization() {
         List<VillageOrganizationResponseDTO> countVillageOrganization = pendudukService.countVillageOrganization();
@@ -50,6 +55,7 @@ public class ReportController {
     }
 
     // Laporan anggota organisasi
+    @ApiOperation(value = "Laporan anggota organisasi")
     @GetMapping("/village-organization/detail")
     public ResponseEntity countVillageOrganizationDetailByPosition() {
         List<VillageOrganizationDetailResponseDTO> countVillageOrganizationDetailByPosition = pendudukService
