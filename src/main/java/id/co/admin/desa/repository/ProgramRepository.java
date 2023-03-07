@@ -9,7 +9,7 @@ import id.co.admin.desa.model.Program;
 
 public interface ProgramRepository extends JpaRepository<Program, Long> {
     // Laporan jumlah penduduk
-    @Query("SELECT COUNT(p) FROM PopulationDataEntity p")
+    @Query("SELECT COUNT(p) FROM Penduduk p")
     Long countPenduduk();
 
     // Laporan data program

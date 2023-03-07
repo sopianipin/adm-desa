@@ -1,6 +1,7 @@
 package id.co.admin.desa.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -8,18 +9,18 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import id.co.admin.desa.dto.PopulationDataDto;
-import id.co.admin.desa.model.PopulationDataEntity;
-import id.co.admin.desa.repository.PopulationDataRepository;
+import id.co.admin.desa.model.Penduduk;
+import id.co.admin.desa.repository.PendudukRepository;
 import id.co.admin.desa.util.BaseResponse;
 
 @Service
 @Transactional
-public class PopulationDataServiceImpl implements PopulationDataService{
+public class PendudukService {
 
-    private PopulationDataRepository populationRepo;
+    private PendudukRepository pendudukRepository;
 
-    public PopulationDataServiceImpl(PopulationDataRepository populationRepo){
-        this.populationRepo =  populationRepo;
+    public PendudukService(PendudukRepository pendudukRepository) {
+        this.pendudukRepository = pendudukRepository;
     }
 
     private static final Integer FAILED_STATUS_CODE = 500;
@@ -27,14 +28,13 @@ public class PopulationDataServiceImpl implements PopulationDataService{
     private static final String SUCCESS_STATUS_MESSAGE = "success";
     private static final String DATA_NOT_FOUND = "Data Not Found";
 
-    @Override
     public BaseResponse getPopulationDataByNik(String nik) {
         BaseResponse response;
 
-        Optional<PopulationDataEntity> data = populationRepo.getPopulationDataEntityByNik(nik);
+        Optional<Penduduk> data = pendudukRepository.getPopulationDataEntityByNik(nik);
 
-        if (data.isPresent()){
-            PopulationDataEntity population = data.get();
+        if (data.isPresent()) {
+            Penduduk population = data.get();
 
             PopulationDataDto result = PopulationDataDto.builder()
                     .id(population.getId())
@@ -67,7 +67,7 @@ public class PopulationDataServiceImpl implements PopulationDataService{
                     .message(SUCCESS_STATUS_MESSAGE)
                     .timestamp(new Date())
                     .build();
-        }else {
+        } else {
             response = BaseResponse.builder()
                     .content(DATA_NOT_FOUND)
                     .statusCode(SUCCESS_STATUS_CODE)
@@ -79,10 +79,9 @@ public class PopulationDataServiceImpl implements PopulationDataService{
         return response;
     }
 
-    @Override
     public BaseResponse addPopulationData(PopulationDataDto request) {
         BaseResponse response;
-        PopulationDataEntity data = PopulationDataEntity.builder()
+        Penduduk data = Penduduk.builder()
                 .nik(request.getNik())
                 .fullName(request.getFullName())
                 .gender(request.getGender())
@@ -106,8 +105,8 @@ public class PopulationDataServiceImpl implements PopulationDataService{
                 .status(request.getStatus())
                 .build();
         try {
-            populationRepo.save(data);
-        }catch (Exception e){
+            pendudukRepository.save(data);
+        } catch (Exception e) {
             response = BaseResponse.builder()
                     .statusCode(FAILED_STATUS_CODE)
                     .error(e.getMessage())
@@ -124,5 +123,19 @@ public class PopulationDataServiceImpl implements PopulationDataService{
         return response;
     }
 
+    public Penduduk save(Penduduk penduduk) {
+        return pendudukRepository.save(penduduk);
+    }
 
+    public List<Penduduk> findAll() {
+        return pendudukRepository.findAll();
+    }
+
+    public Optional<Penduduk> findById(Integer id) {
+        return pendudukRepository.findById(id);
+    }
+
+    public void deleteById(Integer id) {
+        pendudukRepository.deleteById(id);
+    }
 }

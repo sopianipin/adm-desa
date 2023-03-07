@@ -1,4 +1,4 @@
-package id.co.admin.desa.service;
+package id.co.admin.desa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

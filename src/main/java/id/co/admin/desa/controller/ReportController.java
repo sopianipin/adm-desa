@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import id.co.admin.desa.dto.ProgramDetailsResponseDTO;
+import id.co.admin.desa.dto.VillageOrganizationDetailResponseDTO;
+import id.co.admin.desa.dto.VillageOrganizationResponseDTO;
 import id.co.admin.desa.model.Program;
-import id.co.admin.desa.service.ProgramDetailsResponseDTO;
 import id.co.admin.desa.service.ReportService;
-import id.co.admin.desa.service.VillageOrganizationDetailResponseDTO;
-import id.co.admin.desa.service.VillageOrganizationResponseDTO;
 
 @RestController
 @RequestMapping("/reports")
